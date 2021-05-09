@@ -1,4 +1,8 @@
-export const backend = "http://localhost:4100/";
+export var backend = window.location.origin+"/api/"
+if (process.env.NODE_ENV !== 'production') {
+    backend = "http://localhost:4100/";
+}
+
 export var cart = [];
 
 if (navigator.cookieEnabled) {

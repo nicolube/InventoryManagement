@@ -1,0 +1,25 @@
+version: "3.3"  # optional since v1.27.0
+services:
+    backend:
+        build:
+            context: Backend
+            dockerfile: Dockerfile
+        container_name: backend
+        restart: unless-stopped
+        networks:
+            - app-network
+    frontend:
+        build:
+            context: Frontend
+            dockerfile: Dockerfile
+        ports:
+            - "8080:80"
+        container_name: frontend
+        restart: unless-stopped
+        depends_on:
+            - backend
+        networks:
+            - app-network
+networks:
+  app-network:
+    driver: bridge
