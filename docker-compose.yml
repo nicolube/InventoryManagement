@@ -1,10 +1,12 @@
-version: "3.3"  # optional since v1.27.0
+version: "3.3"
 services:
     backend:
         build:
             context: Backend
             dockerfile: Dockerfile
+        image: nicolube/im_backend
         container_name: backend
+        
         restart: unless-stopped
         networks:
             - app-network
@@ -12,14 +14,12 @@ services:
         build:
             context: Frontend
             dockerfile: Dockerfile
+        image: nicolube/im_frontend
         ports:
             - "8080:80"
         container_name: frontend
         restart: unless-stopped
-        depends_on:
+        links:
             - backend
         networks:
             - app-network
-networks:
-  app-network:
-    driver: bridge
