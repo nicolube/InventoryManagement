@@ -8,7 +8,10 @@ import * as dbm  from './data/database_manager'
 const app = express();
 
 
-app.use(bearerToken()).use(cookieParser()).use(express.json()).use(cors())
+app.use(bearerToken())
+    .use(cookieParser())
+    .use(express.json())
+    .use(cors())
 
 dbm.initDB()
 cn.init(app)

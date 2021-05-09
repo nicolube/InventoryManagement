@@ -21,7 +21,7 @@ export const fetchItems = async () => {
     return data;
 }
 export const fetchSellers = async () => {
-    const res = await fetchFromBackend("sellers")
+    const res = await fetchFromBackend("seller")
     const data = await res.json();
     return data;
 }

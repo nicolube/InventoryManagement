@@ -45,7 +45,7 @@ export const userController: Controller = {
                 res.send(await User.find({ id: ids }))
             return
         }
-        res.send(await User.find())
+        res.send(await User.find({limit: 100}))
     },
     onDelete: async (req, res) => {
         const User = models.user;

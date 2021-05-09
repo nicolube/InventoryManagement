@@ -3,6 +3,7 @@ import { userController } from "./controller/user_controller"
 import { authController, tokenHash } from "./controller/auth_controller"
 import { models } from './database_manager';
 import { itemController } from './controller/item_controller';
+import { sellerController } from './controller/seller_controller';
 
 export interface Controller {
     path: string,
@@ -40,7 +41,8 @@ declare global {
 const controllers = [
     authController,
     userController,
-    itemController
+    itemController,
+    sellerController
 ]
 
 function getController(path: string): Controller | undefined {

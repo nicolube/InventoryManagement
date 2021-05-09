@@ -20,6 +20,7 @@ function onAddToCart(e, quantity, id) {
 
 const ItemSite = () => {
   const [items, setItems] = useState([])
+  const [editorShow, setEditorShow] = useState(false)
 
   useEffect(() => {
     const getItems = async () => {
@@ -28,6 +29,10 @@ const ItemSite = () => {
 
     getItems()
   })
+
+  const handleEditorHide =  () => {
+    setEditorShow(false)
+  }
 
   return (
     <div>
@@ -38,8 +43,8 @@ const ItemSite = () => {
         </div>
       </div>
         <Row>
-            {items.map(item => <Item key={item.id} data={item}><AddItem data={item}onAddToCart={onAddToCart}/></Item>)}
-            <ItemEditor/>
+            {items.map(item => <Item key={item.id} data={item}><AddItem data={item} onAddToCart={onAddToCart}/></Item>)}
+            <ItemEditor show={editorShow} onClose={handleEditorHide} onSave={handleEditorHide}/>
           </Row>
     </div>
 

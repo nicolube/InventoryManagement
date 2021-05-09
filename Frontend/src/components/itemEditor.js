@@ -7,12 +7,14 @@ import OrderNoEditor from './OderNoEditor'
 
 var index = 0
 
-const ItemEditor = ({ data=null, onClose, onSave }) => {
+const ItemEditor = ({ data = null, onClose, onSave, show = false }) => {
     const [sellers, setSellers] = useState([])
     const [orderNums, setOderNums] = useState([])
     useEffect(() => {
-        const updateSellers = async () => setSellers(await fetchSellers())
-        if (sellers.length === 0) updateSellers()
+        if (show === true) {
+            const updateSellers = async () => setSellers(await fetchSellers())
+            if (sellers.length === 0) updateSellers()
+        }
     })
 
     const handleAddOrderNr = () => {
@@ -27,6 +29,7 @@ const ItemEditor = ({ data=null, onClose, onSave }) => {
 
     return (
         <Modal
+            show={show}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
