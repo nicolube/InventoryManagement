@@ -4,13 +4,13 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export var cart = [];
-
 if (navigator.cookieEnabled) {
     if (document.cookie["cart"]) {
 
     }
 }
-if (sessionStorage["cart"] !== undefined) {
+if (sessionStorage["cart"]) {
+    console.log("Nano")
     cart = JSON.parse(sessionStorage["cart"]);
 }
 
@@ -27,6 +27,9 @@ export const fetchSellers = async () => {
 }
 
 export const fetchCart = async () => {
+    if (cart.length === 0) {
+        return []
+    }
     var q = "";
     cart.forEach(item => q += 'id='+item.id + '&');
     const res = await fetchFromBackend("items?"+q);
@@ -50,9 +53,10 @@ export const fetchFromBackend = async (path, method = "GET", data=null) => {
     console.log(backend+path)
     return await fetch(backend+path, query);
 }
-
+/*
 export const OpenWinowShort = async (url) => {
-    const w = await window.open(url);
+    const w = window.open(url);
     setTimeout(() => window.focus(), 10);
     setTimeout(() => w.close(), 500);
   }
+  */

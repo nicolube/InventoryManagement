@@ -10,7 +10,6 @@ const assingSellers = async (entity: any) => {
             }
         }
     }
-    console.log(sellerIds)
     const Seller = models.seller
     var sellers: any[] = await Seller.find({id: sellerIds})
 
@@ -27,7 +26,14 @@ export const itemController: Controller = {
     secured: false,
     onGet: async (req, res) => {
         const Items = models.item
-        
+        if (req.query.id) {
+            var ids: any = req.query.id
+            if (!Array.isArray(ids))
+                ids = [ids]
+            ids = (ids as string[]).map(e => +e).filter(e => !isNaN(e))
+            res.send(await assingSellers(await Items.find({id: ids}).populate("order_nos")))
+            return
+        }
         if (req.query.start) {
             const start = +req.query.start
             if (isNaN(start)) {

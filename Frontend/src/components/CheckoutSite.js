@@ -10,7 +10,8 @@ const CheckoutSite = () => {
     useEffect(() => {
         const updateCart = async () => {
             var data = await util.fetchCart();
-            data.map(i => i["std_restock"] = util.cart.filter(e => e["id"] === i["id"])[0]["quantity"]);
+            data.map(i => i["quantity"] = util.cart.filter(e => i["id"] === e["id"]));
+            console.log(data)
             setCart(data);
         }
         updateCart()
