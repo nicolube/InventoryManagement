@@ -50,13 +50,12 @@ export const fetchFromBackend = async (path, method = "GET", data=null) => {
     if (data !== null) {
         query["body"] = JSON.stringify(data);
     }
-    console.log(backend+path)
     return await fetch(backend+path, query);
 }
-/*
+
 export const OpenWinowShort = async (url) => {
     const w = window.open(url);
     setTimeout(() => window.focus(), 10);
     setTimeout(() => w.close(), 500);
   }
-  */
+  

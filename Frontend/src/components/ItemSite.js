@@ -30,7 +30,7 @@ const ItemSite = () => {
     getItems()
   })
 
-  const handleEditorHide =  () => {
+  const handleEditorHide = () => {
     setEditorShow(false)
   }
 
@@ -42,10 +42,12 @@ const ItemSite = () => {
           <button className="btn">{util.cart.length}</button>
         </div>
       </div>
-        <Row>
-            {items.map(item => <Item key={item.id} data={item}><AddItem data={item} onAddToCart={onAddToCart}/></Item>)}
-            <ItemEditor show={editorShow} onClose={handleEditorHide} onSave={handleEditorHide}/>
-          </Row>
+      <Row>
+        {items.map(item => <Item key={item.id} data={item}>
+          <AddItem data={item} onAddToCart={onAddToCart}/>
+        </Item>)}
+        <ItemEditor show={editorShow} onClose={handleEditorHide} onSave={handleEditorHide} />
+      </Row>
     </div>
 
   );

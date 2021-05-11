@@ -2,6 +2,7 @@ import { Controller } from '../controller_handler'
 import { models } from '../database_manager'
 import * as argon2 from 'argon2'
 import crypto from 'crypto'
+import { query } from 'express'
 
 export const tokenHash = crypto.createHash("sha256")
 
@@ -10,8 +11,8 @@ export const authController: Controller = {
     secured: false,
     onPost: async (req, res) => {
         const User = models.user;
-        var name = req.query.name
-        var password = req.query.password
+        var name = req.body.name
+        var password = req.body.password
         if (name && password) {
             await User.findOne({
                 or: [

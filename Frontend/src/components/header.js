@@ -1,8 +1,22 @@
-import { Button, Container, Nav } from 'react-bootstrap'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Button, Container, Nav } from 'react-bootstrap';
+import { Link, useHistory } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
-function header() {
+
+const LoginButton = ({ state, setState }) => {
+
+    const history = useHistory()
+    const handleLogout = () => {
+        Cookies.remove("token")
+        delete sessionStorage.token
+        history.push("/login")
+        setState(false)
+    }
+    if (state) return (<Button variant="danger" onClick={handleLogout}>Logout</Button>)
+    return (<Link to="/login"><Button>Login</Button></Link>)
+}
+
+const Header = ({login, setLogin}) => {
     return (
         <header className="d-flex bg-dark text-white">
             <Container className="d-flex flex-wrap justify-content-center py-3 mb-4 align-items-center ">
@@ -15,11 +29,12 @@ function header() {
 
                 </Nav>
                 <div className="text-end">
-                    <Link to="/login"><Button>Login</Button></Link>
+                    <LoginButton state={login} setState={setLogin} />
                 </div>
             </Container>
         </header>
     )
 }
 
-export default header
+
+export default Header

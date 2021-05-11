@@ -6,7 +6,6 @@ const Item = ({ data, children }) => {
             <Card>
                 <div className="d-flex mt-1">
                     <p>{data.name}</p>
-                    <div className="space-between" />
                     {children}
                 </div>
                 <div className="d-flex">
